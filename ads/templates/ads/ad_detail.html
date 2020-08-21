@@ -1,0 +1,97 @@
+{% extends "base_menu.html" %}
+
+{% load humanize %} <!-- https://docs.djangoproject.com/en/3.0/ref/contrib/humanize -->
+{% block head %}
+<style>
+body {
+    font-family : Tahoma, Geneva, sans-serif;
+}
+.overlay{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 20;
+  display: none;
+  background-color: rgba(0,0,0,0.5); /*dim the background*/
+}
+.commentclass{
+    font-family:sans-serif;
+    color : #f5c133;
+    font-size:11px;
+    text-shadow: 0.7px 0.7px black;
+}
+</style>
+{% endblock %}
+{% block content %}
+<span style="float: right;">
+<p>({{ ad.updated_at|naturaltime }})</p>
+{% if ads.owner == user %}
+<a href="{% url 'ads:ad_update' ad.id %}"><i class="fa fa-pencil"></i></a>
+<a href="{% url 'ads:ad_delete' ad.id %}"><i class="fa fa-trash"></i></a>
+{% endif %}
+</span>
+<h1>{{ ad.title }}</h1>
+
+{% if ad.content_type %}
+<div id="overlay" class="overlay" style="text-align: center;"
+   onclick=" document.getElementById('overlay').style.display = 'none'; " >/*  document.body.style.backgroundColor = 'rgba(0,0,0,0.5)';  */
+<img style="width:90%;margin-top: 50px; border:3px solid black;" src="{% url 'ads:ad_picture' ad.id %}">
+</div>
+{% endif %}
+
+
+<br>
+<!--<h1>{{ ad.price }}</h1>-->
+
+{% if ad.content_type %}
+<div style="text-align: justify;text-justify: inter-word;">
+<img style="float:right; max-width:47%;" src="{% url 'ads:ad_picture' ad.id %}"
+    onclick="document.getElementById('overlay').style.display = 'block';">
+    </div>
+{% endif %}
+
+<p><div style="padding-top: 50px;
+  padding-right: 50%;
+  padding-bottom: 50px;
+  padding-left: 10px;
+  text-align: justify;
+  text-justify: inter-word;">
+{{ ad.text }}
+</div></p>
+<p>
+
+{% if user.is_authenticated %}
+<p>
+{% load crispy_forms_tags %}
+{% if ad.owner_id == user.id %}
+        (<a href="{% url 'ads:ad_update' ad.id %}">Edit</a> |
+        <a href="{% url 'ads:ad_delete' ad.id %}">Delete</a>)
+{% endif %}
+</p>
+<br clear="all"/>
+<p>
+<form method="post" action="{% url 'ads:ad_comment_create' ad.id %}">
+    {% csrf_token %}
+    {{ comment_form|crispy }}
+<input type="submit" value="Submit">
+<input type="submit" value="All Vlogs" onclick="window.location.href='{% url 'ads:all' %}';return false;">
+</form>
+</p>
+{% endif %}
+{% for comment in comments %}
+<p> {{ comment.text }}
+({{ comment.updated_at|naturaltime }})
+{% if user == comment.owner %}
+<a href="{% url 'ads:ad_comment_delete' comment.id %}"><i class="fa fa-trash"></i></a><span class="commentclass">&nbsp&nbspposted by you.</span>
+{% else %}<span class="commentclass">&nbsp&nbsp posted by {{ comment.owner}}</span>
+{% endif %}
+</p>
+{% endfor %}
+
+</p>
+<p>
+<a href="{% url 'ads:all' %}">All Vlogs</a>
+</p>
+{% endblock %}

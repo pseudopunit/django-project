@@ -1,0 +1,31 @@
+{% extends "base_menu.html" %}
+{% block title %}Contact Us{% endblock title %}
+{% load crispy_forms_tags %}
+{% block content %}
+<p>
+<h1>Contact us</h1>
+{% if user.is_authenticated %}
+<p class="success">
+    You are already Logged in :)<br>Please logout to request for another set of credentials !
+</p>
+{% else %}
+{% if submitted == 1 %}
+<p class="success">
+  Your request was submitted successfully. Thank you.
+</p>
+{% elif submitted == 2 %}
+<p class="success">
+    Your mail has already been registed for Request !<br>Please wait for our Response if you don't get already verified :)<br /><br /><br />
+    Please don't try multiple time it only wastes your time.
+</p>
+{% else %}
+<form action="" method="post" novalidate>
+    {% csrf_token %}
+    {{ form|crispy }}
+    <input type="submit" value="Submit">
+    <input type="submit" value="Cancel" onclick="window.location.href='{% url 'ads:all' %}';return false;">
+</form>
+{% endif %}
+{% endif %}
+</p>
+{% endblock %}

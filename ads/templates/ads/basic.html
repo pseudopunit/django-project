@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portfolio</title>
+    <link rel="stylesheet" href="style2.css" />
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro">
+
+    <style>
+        * {
+          margin: 0;
+          padding: 0;
+        }
+        html {
+          /* scroll-snap-type: y mandatory;
+          /* Reserve space for header plus some extra space for sneak peeking. -----
+          scroll-padding-top: 15vh;
+          overflow-y: scroll; */
+          scroll-snap-points-y: repeat(100vh);
+          scroll-snap-type: y mandatory;
+        }
+        body {
+          font-family: "Poppins", sans-serif;
+          background-image: linear-gradient(to right bottom, white 0%, #39d0e4c7 90%);
+        }
+        button {
+          font-family: "Poppins", sans-serif;
+        }
+        header {
+          width: 80%;
+          display: flex;
+          height: 10vh;
+          margin: auto;
+          align-items: center;
+        }
+        .logo-container,
+        .nav-links,
+        .nav-link {
+          display: flex;
+        }
+        .logo-container {
+          flex: 1;
+          transition: font-weight 0.5s;
+        }
+        .logo {
+          font-weight: 400;
+          margin: 5px;
+        }
+        .logo-container h4:hover {
+          font-weight: 300;
+          color: tomato;
+        }
+        nav {
+          flex: 1;
+        }
+        .nav-links {
+          justify-content: space-around;
+          list-style: none;
+        }
+        .nav-link {
+          color: tomato;
+          font-weight: 500;
+          /* font-size: 14px; */
+          text-decoration: none;
+          transition: 0.5s;
+        }
+        .nav-link:hover {
+          font-weight: 700;
+          color: black;
+        }
+        .presentation {
+          display: flex;
+          width: 90%;
+          margin: auto;
+          max-width: 100vw;
+          overflow: hidden;
+          align-items: center;
+          height: 100vh;
+          scroll-snap-align: end;
+        }
+        section:nth-child(1) {
+          width: 100%;
+          height: 90vh;
+          margin-left: 0;
+          margin-right: 0;
+        }
+        .introduction {
+          flex: 1;
+          margin-left: 10%;
+          margin-right: 10%;
+        }
+        .intro-text h1 {
+          font-size: 32px;
+          font-weight: 500;
+        }
+        .intro-text p {
+          margin-top: 7px;
+          font-size: 14px;
+        }
+        .cta {
+          padding: 50px 0px 0px 0px;
+        }
+        .cta-select {
+          border: 2px solid tomato;
+          background: transparent;
+          color: tomato;
+          width: 150px;
+          height: 50px;
+          cursor: pointer;
+          font-size: 16px;
+        }
+        .cta-add {
+          background: tomato;
+          color: white;
+          width: 150px;
+          height: 50px;
+          cursor: pointer;
+          font-size: 16px;
+          border: none;
+          margin: 30px 0px 0px 30px;
+        }
+        .cover {
+          flex: 1;
+          display: flex;
+          justify-content: right;
+          height: 60vh;
+        }
+        .cover img {
+          height: 100%;
+          filter: drop-shadow(0px 5px 3px black);
+          animation: drop 1.5s ease;
+        }
+        section:nth-child(3) {
+          /* /* background-image: linear-gradient(to right, white 0%, #a6c1ee 100%); */
+          max-width: 100vw;
+          width: 100%;
+          margin-left: 0;
+          margin-right: 0;
+          overflow: hidden;
+          font-family: monospace;
+        }
+        .leftc {
+          height: 100vh;
+          width: 100%;
+          background-color: seashell;
+          padding: 65vh 0px 0px 5%;
+          transform: translateY(-10%);
+          text-align: left;
+          text-justify: auto;
+          position: relative;
+        }
+        .leftc h1 {
+          font-size: 32px;
+          margin-right: 5px;
+          text-align: right;
+          padding: 0 0 auto auto;
+          padding-bottom: 8vh;
+        }
+        .leftc h2 {
+          /* position: fixed; */
+          padding-bottom: 40px;
+          font-size: 32px;
+        }
+        .leftc h4 {
+          font-weight: bold;
+          font-size: 16px;
+        }
+        .leftc a {
+          color: black;
+          text-decoration: none;
+          transition: 0.5s;
+        }
+        .rightc {
+          height: 100vh;
+          width: 100%;
+          background-color: rgb(250, 191, 250);
+          padding: 65vh 5% 0 0;
+          transform: translateY(-10%);
+          text-align: right;
+          text-justify: auto;
+          position: relative;
+        }
+        .rightc h1 {
+          font-size: 32px;
+          margin-left: 5px;
+          text-align: left;
+          padding: 0 auto auto 0;
+          padding-bottom: 8vh;
+        }
+        .rightc h2 {
+          /* position: fixed; */
+          padding-bottom: 40px;
+          font-size: 32px;
+        }
+        .rightc h4 {
+          font-weight: bold;
+          font-size: 16px;
+        }
+        .rightc a {
+          color: black;
+          text-decoration: none;
+          transition: 0.5s;
+        }
+        .leftc a:hover,
+        .rightc a:hover {
+          color: tomato;
+        }
+        .clock {
+          z-index: 2;
+          margin-left: -100px;
+          margin-right: -100px;
+          padding-top: 70vh;
+        }
+        section:nth-child(4) {
+          background: linear-gradient(to right, #ff5f6d, #ffc371);
+          width: 100%;
+          margin-left: 0;
+          margin-right: 0;
+        }
+        .textvertical {
+          font-size: 80px;
+          margin: auto auto auto -10vw;
+          font-family: Arial, Helvetica, sans-serif;
+          background: linear-gradient(to right, #a33ad3ec, #266cd4f3);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-color: white;
+          -webkit-transform: rotate(270deg);
+          text-transform: uppercase;
+          font-weight: 530;
+        }
+        .slidecontainer,
+        .slidecontainer2 {
+          overflow: hidden;
+          height: 550px;
+          position: relative;
+        }
+        .slidecontainer {
+          width: 50%;
+          margin: auto 8% auto auto;
+        }
+        .slidecontainer2 {
+          width: 56%;
+          margin: auto auto auto 4%;
+        }
+        .slides,
+        .slides2 {
+          display: flex;
+          width: 100%;
+        }
+        .slides img,
+        .slides2 img {
+          height: 500px;
+          width: 50vw;
+          /* position: absolute; */
+          /* width: 50%; */
+        }
+        .slides h4,
+        .slides2 h4 {
+          text-align: center;
+          height: 100%;
+          margin: auto;
+          padding-top: 10px;
+          justify-content: center;
+          transition: 0.5s;
+          cursor: none;
+        }
+        .slides h4:hover,
+        .slides2 h4:hover {
+          color: white;
+        }
+        #prevbtn,
+        #prevbtn2 {
+          position: absolute;
+          top: 42%;
+          z-index: 10;
+          left: 10px;
+          font-size: 25px;
+          color: black;
+          opacity: 0.7;
+          cursor: pointer;
+          transition: 0.3s;
+        }
+        #prevbtn:hover,
+        #prevbtn2:hover {
+          color: #ffc371;
+        }
+        #nextbtn,
+        #nextbtn2 {
+          position: absolute;
+          top: 42%;
+          z-index: 10;
+          right: 10px;
+          font-size: 25px;
+          color: black;
+          /* color: rgb(71, 243, 71); */
+          opacity: 0.7;
+          cursor: pointer;
+          transition: 0.3s;
+        }
+        #nextbtn:hover,
+        #nextbtn2:hover {
+          color: #ff5f6d;
+        }
+        .textvertical2 {
+          font-size: 80px;
+          max-width: 30%;
+          height: 100%;
+          margin: auto auto 20% auto;
+          font-family: Source Sans Pro, sans-serif;
+          background-color: white;
+          writing-mode: vertical-rl;
+          letter-spacing: -25px;
+          text-orientation: upright;
+          text-transform: uppercase;
+          font-weight: 530;
+        }
+        @keyframes drop {
+          0% {
+            opacity: 0;
+            transform: translateX(180px);
+          }
+          100% {
+            opacity: 1;
+            transform: translateX(0px);
+          }
+        }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="logo-container">
+        <!--<img src="#" alt="img"/>-->
+        <h4>My Portfolio</h4>
+      </div>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="#profilepage" class="nav-link">Profile</a></li>
+          <li><a href="#skillpage" class="nav-link">Skills</a></li>
+          <li><a href="#" class="nav-link">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main class="scrollclass">
+      <section class="presentation">
+        <div class="introduction">
+          <div class="intro-text">
+            <h1>Hey There !</h1>
+            <p>
+              This is My Portfolio... <br />
+              Go look around and find more about me :)
+            </p>
+          </div>
+          <div class="cta">
+            <button class="cta-select">Button 1</button>
+            <button class="cta-add">Button 2</button>
+          </div>
+        </div>
+        <div class="cover">
+          <img src="/media/images/edited-profile.png" alt="image-here" />
+        </div>
+      </section>
+      <br>
+      <section class="presentation" id="profilepage">
+          <div class="leftc">
+              <h1>Here's the time</h1>
+              <h2>Info about me :</h2><br>
+              <h4>Name : Punit Choudhary</h4><br>
+              <h4>DoB : Nov, 14 1998</h4><br>
+              <h4>Gender : Male</h4><br>
+              <h4>Mail : <a href="https://it1721.iiitbhopal@gmail.com" target="#">it1721.iiitbhopal@gmail.com</a></h4>
+          </div>
+          <canvas id="canvas" width="200" height="200" class="clock">
+          </canvas>
+          <div class="rightc">
+            <h1>don't waste it !</h1>
+            <h2>Find me at :</h2><br>
+              <h4>Github : <a href="https://github.com/pseudopunit" target="#">/pseudopunit</a></h4><br>
+              <h4>LinkedIn : <a href="https://www.linkedin.com/in/punit014" target="#">/Punit014</a></h4><br>
+              <h4>HackerRank : <a href="https://www.hackerrank.com/punit014" target="#">/Punit014</a></h4><br>
+              <h4>Website : <a href="https://punit014.pythonanywhere.com" target="#">punit014.pythonanywhere.com</a></h4><br>
+            </div>
+      </section>
+      <section class="presentation" id="skillpage">
+        <div class="textvertical">Certificates</div>
+        <div class="slidecontainer">
+          <i class="fa fa-arrow-left" aria-hidden="true" id="prevbtn"></i>
+          <i class="fa fa-arrow-right" aria-hidden="true" id="nextbtn"></i>
+          <div class="slides">
+            <!-- <div>            -->
+            <img src="/media/images/microsoft.png" id="lastimg" alt="">
+            <!-- <h4 style="bottom: 0;">This should appear below the 1</h4></div> -->
+            <div><img src="/media/images/Coursera1.png" alt="">
+            <h4>Python for everybody Specialisation certificate</h4></div>
+            <div><img src="/media/images/Coursera2.png" alt="">
+            <h4>Django for everybody Specialisation</h4></div>
+            <div><img src="/media/images/Coursera3.png" alt="">
+            <h4>Google IT support Specialisation</h4></div>
+            <div><img src="/media/images/Coursera4.png" alt="">
+            <h4>Honors certificate for Retrieving, Processing, and Visualizing Data with Python</h4></div>
+            <div><img src="/media/images/microsoft.png" alt="">
+            <h4>Microsoft Virtual Experience Program Certificate</h4></div>
+            <img src="/media/images/Coursera1.png" id="firstimg" alt="">
+          </div>
+        </div>
+      </section>
+      <section class="presentation">
+        <div class="slidecontainer2">
+          <i class="fa fa-arrow-left" aria-hidden="true" id="prevbtn2"></i>
+          <i class="fa fa-arrow-right" aria-hidden="true" id="nextbtn2"></i>
+          <div class="slides2">
+            <!-- <div>            -->
+            <img src="/static/images/microsoft.png" id="lastimg2" alt="">
+            <!-- <h4 style="bottom: 0;">This should appear below the 1</h4></div> -->
+            <div><img src="/static/images/Coursera1.png" alt="">
+            <h4>Python for everybody Specialisation certificate</h4></div>
+            <div><img src="/static/images/Coursera2.png" alt="">
+            <h4>Django for everybody Specialisation</h4></div>
+            <div><img src="/static/images/Coursera3.png" alt="">
+            <h4>Google IT support Specialisation</h4></div>
+            <div><img src="/static/images/Coursera4.png" alt="">
+            <h4>Honors certificate for Retrieving, Processing, and Visualizing Data with Python</h4></div>
+            <div><img src="/static/images/microsoft.png" alt="">
+            <h4>Microsoft Virtual Experience Program Certificate</h4></div>
+            <img src="/static/images/Coursera1.png" id="firstimg2" alt="">
+          </div>
+        </div>
+        <div class="textvertical2">Projects</div>
+      </section>
+    <section class="presentation">
+      <div class="introduction">
+          <p><h1>Sample text here</h1></p>
+      </div>
+  </section>
+    </main>
+    <footer>
+    </footer>
+  </body>
+  <script src="app.js"></script>
+  <script src="clock.js"></script>
+  <script>
+        var canvas = document.getElementById("canvas");
+        var ctx = canvas.getContext("2d");
+        var radius = canvas.height / 2;
+        ctx.translate(radius, radius);
+        radius = radius * 0.9;
+        setInterval(drawClock, 1000);
+
+        function drawClock() {
+          drawFace(ctx, radius);
+          drawNumbers(ctx, radius);
+          drawTime(ctx, radius);
+        }
+
+        function drawFace(ctx, radius) {
+          var grad;
+          ctx.beginPath();
+          ctx.arc(0, 0, radius, 0, 2 * Math.PI);
+          var my_gradient = ctx.createLinearGradient(0, 0, 170, 0);
+          my_gradient.addColorStop(0, "rgb(250, 191, 250)");
+          my_gradient.addColorStop(0, "seashell");
+
+          ctx.fillStyle = my_gradient;
+          ctx.fill();
+          grad = ctx.createRadialGradient(0, 0, radius * 0.95, 0, 0, radius * 1.05);
+          grad.addColorStop(0, "rgb(250, 191, 250");
+          grad.addColorStop(0.5, "seashell");
+          grad.addColorStop(1, "#00FFFFFF");
+          ctx.strokeStyle = grad;
+          ctx.lineWidth = radius * 0.1;
+          ctx.stroke();
+          ctx.beginPath();
+          ctx.arc(0, 0, radius * 0.05, 0, 2 * Math.PI);
+          ctx.fillStyle = "tomato";
+          ctx.fill();
+        }
+
+        function drawNumbers(ctx, radius) {
+          var ang;
+          var num;
+          ctx.font = radius * 0.15 + "px arial";
+          ctx.textBaseline = "middle";
+          ctx.textAlign = "center";
+          for (num = 1; num < 13; num++) {
+            ang = (num * Math.PI) / 6;
+            ctx.rotate(ang);
+            ctx.translate(0, -radius * 0.85);
+            ctx.rotate(-ang);
+            ctx.fillText(num.toString(), 0, 0);
+            ctx.rotate(ang);
+            ctx.translate(0, radius * 0.85);
+            ctx.rotate(-ang);
+          }
+        }
+
+        function drawTime(ctx, radius) {
+          var now = new Date();
+          var hour = now.getHours();
+          var minute = now.getMinutes();
+          var second = now.getSeconds();
+          //hour
+          hour = hour % 12;
+          hour =
+            (hour * Math.PI) / 6 +
+            (minute * Math.PI) / (6 * 60) +
+            (second * Math.PI) / (360 * 60);
+          grad = ctx.createRadialGradient(0, 0, radius * 0.95, 0, 0, radius * 1.05);
+          grad.addColorStop(0, "red");
+          ctx.strokeStyle = grad;
+          drawHand(ctx, hour, radius * 0.5, radius * 0.065);
+          //minute
+          minute = (minute * Math.PI) / 30 + (second * Math.PI) / (30 * 60);
+          grad = ctx.createRadialGradient(0, 0, radius * 0.95, 0, 0, radius * 1.05);
+          grad.addColorStop(0, "black");
+          ctx.strokeStyle = grad;
+          drawHand(ctx, minute, radius * 0.7, radius * 0.053);
+          // second
+          second = (second * Math.PI) / 30;
+          grad = ctx.createRadialGradient(0, 0, radius * 0.95, 0, 0, radius * 1.05);
+          grad.addColorStop(0, "yellow");
+          ctx.strokeStyle = grad;
+          drawHand(ctx, second, radius * 0.8, radius * 0.02);
+        }
+
+        function drawHand(ctx, pos, length, width) {
+          ctx.beginPath();
+          ctx.lineWidth = width;
+          ctx.lineCap = "round";
+          ctx.moveTo(0, 0);
+          ctx.rotate(pos);
+          ctx.lineTo(0, -length);
+          ctx.stroke();
+          ctx.rotate(-pos);
+        }
+
+    </script>
+
+    <script>
+        const slide = document.querySelector('.slides');
+        const images = document.querySelectorAll('.slides img');
+
+        const prevbtn = document.querySelector("#prevbtn");
+        const nextbtn = document.querySelector("#nextbtn");
+
+        let counter = 1;
+        const size = images[1].clientWidth;
+        //683;
+        slide.style.transform = "translateX(" + (-size * counter) + "px)";
+
+        nextbtn.addEventListener("click", () => {
+            if(counter >= images.length -1) return;
+          slide.style.transition = "transform 0.3s ease-in-out";
+          counter++;
+          slide.style.transform = "translateX(" + (-size * counter) + "px)";
+        });
+
+        prevbtn.addEventListener("click", () => {
+            if(counter <=0) return;
+            slide.style.transition = "transform 0.3s ease-in-out";
+            counter--;
+            slide.style.transform = "translateX(" + (-size * counter) + "px)";
+        });
+
+        slide.addEventListener('transitionend', () => {
+            if(images[counter].id === "lastimg"){
+                slide.style.transition = "none";
+                counter = images.length - 2;
+                slide.style.transform = "translateX(" + (-size * counter) + "px)";
+            }
+            if(images[counter].id === "firstimg"){
+                slide.style.transition = "none";
+                counter = images.length - counter;
+                slide.style.transform = "translateX(" + (-size * counter) + "px)";
+            }
+        });
+
+
+        const slide2 = document.querySelector('.slides2');
+        const images2 = document.querySelectorAll('.slides2 img');
+
+        const prevbtn2 = document.querySelector("#prevbtn2");
+        const nextbtn2 = document.querySelector("#nextbtn2");
+
+        let counter2 = 1;
+        const size2 = images2[1].clientWidth;
+        //683;
+        slide2.style.transform = "translateX(" + (-size2 * counter2) + "px)";
+
+        nextbtn2.addEventListener("click", () => {
+            if(counter2 >= images2.length -1) return;
+          slide2.style.transition = "transform 0.3s ease-in-out";
+          counter2++;
+          slide2.style.transform = "translateX(" + (-size2 * counter2) + "px)";
+        });
+
+        prevbtn2.addEventListener("click", () => {
+            if(counter2 <=0) return;
+            slide2.style.transition = "transform 0.3s ease-in-out";
+            counter2--;
+            slide2.style.transform = "translateX(" + (-size2 * counter2) + "px)";
+        });
+
+        slide2.addEventListener('transitionend', () => {
+            if(images2[counter2].id === "lastimg2"){
+                slide2.style.transition = "none";
+                counter2 = images2.length - 2;
+                slide2.style.transform = "translateX(" + (-size2 * counter2) + "px)";
+            }
+            if(images2[counter2].id === "firstimg2"){
+                slide2.style.transition = "none";
+                counter2 = images2.length - counter2;
+                slide2.style.transform = "translateX(" + (-size2 * counter2) + "px)";
+            }
+        });
+    </script>
+  <script src="https://kit.fontawesome.com/4da59be5a1.js" crossorigin="anonymous"></script>
+</html>
